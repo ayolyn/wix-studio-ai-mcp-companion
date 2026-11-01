@@ -1,0 +1,28 @@
+# ── secrets / env (NEVER commit real env files) ──────────────────────────────
+.env
+.env.*
+!.env.example
+*.pem
+*.key
+
+# ── private / local-only (kept on disk, never pushed) ────────────────────────
+PARTNERSHIP-PITCH.md
+docs/media/
+
+# ── deps / build ─────────────────────────────────────────────────────────────
+node_modules/
+*.log
+.DS_Store
+
+# ── visual scraper (browser deps + generated output) ─────────────────────────
+visual/node_modules/
+visual/wix-visual.json
+
+# ── local-only generated maps (don't publish a real siteId / element names) ──
+examples/_*/
+/wix-elements.json
+/wix-elements.md
+/wix-media.json
+/wix-media.md
+/wix-cms.json
+/wix-cms.md

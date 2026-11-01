@@ -1,0 +1,52 @@
+﻿{
+  "name": "wix-studio-ai-mcp-companion",
+  "version": "0.3.0",
+  "description": "Make Claude see a Wix Studio site: surfaces the gitignored .wix/types element map, page layout/styles, the cloud Media Manager and CMS field schema into committed, agent-readable maps, plus code-owned UI scaffolds. Read-only, ToS-safe.",
+  "type": "module",
+  "bin": {
+    "wix-studio-ai-mcp-companion": "scripts/wix-init.mjs"
+  },
+  "files": [
+    "scripts/",
+    "templates/",
+    "assets/",
+    "docs/",
+    ".githooks/",
+    "visual/scan.mjs",
+    "visual/lib.mjs",
+    "visual/package.json",
+    "visual/README.md",
+    "examples/demo/",
+    "README.md",
+    "CHANGELOG.md",
+    "LICENSE"
+  ],
+  "scripts": {
+    "init": "node scripts/wix-init.mjs",
+    "selftest": "node scripts/selftest.mjs"
+  },
+  "engines": {
+    "node": ">=18"
+  },
+  "author": "Seshat",
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/ayolyn/wix-studio-ai-mcp-companion.git"
+  },
+  "bugs": {
+    "url": "https://github.com/ayolyn/wix-studio-ai-mcp-companion/issues"
+  },
+  "homepage": "https://github.com/ayolyn/wix-studio-ai-mcp-companion#readme",
+  "keywords": [
+    "wix",
+    "velo",
+    "wix-studio",
+    "claude",
+    "claude-code",
+    "wix-cli",
+    "ai",
+    "addon",
+    "codegen"
+  ]
+}

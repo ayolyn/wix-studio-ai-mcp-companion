@@ -1,0 +1,25 @@
+#!/bin/sh
+# Refuse to commit any real .env file (allow .env.example). Defense-in-depth so a
+# secret can never be committed even if .gitignore is edited or -f is used.
+# Enable once per clone:  git config core.hooksPath .githooks
+
+blocked=$(git diff --cached --name-only | grep -E '(^|/)\.env($|\.)' | grep -vE '\.env\.example$')
+
+if [ -n "$blocked" ]; then
+  echo "✖ Commit blocked — these look like real env files (possible secrets):"
+  echo "$blocked" | sed 's/^/    - /'
+  echo "  They are gitignored for a reason. Put structure in .env.example instead."
+  echo "  (If you REALLY mean it: git commit --no-verify — not recommended.)"
+  exit 1
+fi
+
+# Warn (do NOT block) if the element map looks stale vs .wix/types.
+if [ -f scripts/wix-check.mjs ] && [ -d .wix/types ]; then
+  node scripts/wix-check.mjs >/dev/null 2>&1 || echo "⚠ WiXAnything: element map may be stale — run 'npm run wix:elements' (not blocking this commit)"
+fi
+
+# Warn (do NOT block) if Velo has .text-on-a-container / unknown-id issues.
+if [ -f scripts/wix-lint.mjs ] && [ -f wix-elements.json ]; then
+  node scripts/wix-lint.mjs >/dev/null 2>&1 || echo "⚠ WiXAnything: wix-lint found Velo issues — run 'npm run wix:lint' (not blocking this commit)"
+fi
+exit 0
